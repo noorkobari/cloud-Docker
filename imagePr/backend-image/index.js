@@ -6,14 +6,14 @@ const app = express();
 app.use(cors()); 
 const connection = mysql.createConnection({
   host: 'database',
-  port:3307,
-  user: 'myuser',
-  password: 'mypassword',
-  database: 'myapp',
+  port:3306,
+  user: 'user',
+  password: 'password',
+  database: 'News_Db',
 });
 
 app.get('/getUrgentNews', (req, res) => {
-  connection.query('SELECT * FROM news', (error, results) => {
+  connection.query('SELECT * FROM News', (error, results) => {
     if (error) {
       console.error('Error querying MySQL database:', error);
       res.status(500).send('Error querying MySQL database');
