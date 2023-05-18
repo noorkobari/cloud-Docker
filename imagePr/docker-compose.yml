@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  database:
+    build: ./mysql-image
+    environment:
+       MYSQL_ROOT_PASSWORD: password
+       MYSQL_DATABASE: myapp
+       MYSQL_USER: myuser
+       MYSQL_PASSWORD: mypassword
+    ports:
+      - "3307:3307"
+  
+  backend:
+    build: ./backend-image
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+
+  frontend:
+    build: ./frontend-image
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
